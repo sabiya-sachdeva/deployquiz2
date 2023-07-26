@@ -10,7 +10,7 @@ const bookschema=new mongoose.Schema({
     sid:Number
 })
 
-const book=mongoose.model("Quiz",bookschema);
+const book=mongoose.model("examrecords",bookschema);
 
 const data=[
     {name:"sabiya",
@@ -20,6 +20,7 @@ const data=[
 async function insertdata(){
     try{
         await book.insertMany(data);
+    
         console.log("successfully")
     }
     catch(err)
@@ -29,12 +30,17 @@ async function insertdata(){
         mongoose.connection.close();
     }
 }
+
+
 app.get("/",(req,res)=>{
 
-
+   
     res.send(insertdata());
-    console.log("respinse receive")
+   
+    console.log("record added to database")
 })
-app.listen(7000,()=>{
+
+
+app.listen(3000,()=>{
     console.log("connection set up")
 })
